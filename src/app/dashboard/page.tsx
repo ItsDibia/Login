@@ -1,11 +1,17 @@
-import { getServerSession } from "next-auth"
+import { getServerSession } from "next-auth/next"
 import { redirect } from "next/navigation"
 import { authOptions } from "@/lib/auth"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { LogoutButton } from "@/components/logout-button"
 
 export default async function DashboardPage() {
-  const session = await getServerSession(authOptions)
+  const session = await getServerSession(authOptions) as {
+    user: {
+      id: string;
+      username: string;
+      role: string;
+    }
+  } | null
 
   if (!session) {
     redirect("/login")
