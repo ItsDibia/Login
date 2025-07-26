@@ -5,13 +5,12 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { AlertTriangle, Home, RefreshCw } from "lucide-react"
 
-export default function Error({
-  error,
-  reset,
-}: {
+interface ErrorPageProps {
   error: Error & { digest?: string }
   reset: () => void
-}) {
+}
+
+export default function ErrorPage({ error, reset }: ErrorPageProps) {
   return (
     <div className="min-h-screen flex items-center justify-center bg-red-50">
       <Card className="w-full max-w-md border-red-200">
@@ -27,7 +26,7 @@ export default function Error({
         <CardContent className="space-y-4">
           <div className="p-3 bg-red-50 border border-red-200 rounded-md">
             <p className="text-sm text-red-700 font-mono">
-              {error.message || "Error desconocido"}
+              {error?.message || "Error desconocido"}
             </p>
           </div>
           
