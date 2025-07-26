@@ -5,13 +5,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { LogoutButton } from "@/components/logout-button"
 
 export default async function DashboardPage() {
-  const session = await getServerSession(authOptions) as {
-    user: {
-      id: string;
-      username: string;
-      role: string;
-    }
-  } | null
+  type SessionUser = { id: string; username: string; role: string }
+  type Session = { user: SessionUser } | null
+  const session = await getServerSession(authOptions) as Session
 
   if (!session) {
     redirect("/login")
